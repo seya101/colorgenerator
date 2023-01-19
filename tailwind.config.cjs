@@ -5,7 +5,12 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'fredoka-one': ['Fredoka One', 'cursive'],
+        'nunito-sans': ['Nunito Sans', 'sans-serif']
+      },
+    },
   },
   plugins: [],
 }
