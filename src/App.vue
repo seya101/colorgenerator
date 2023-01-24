@@ -9,8 +9,8 @@
 		
 		<div class="w-full text-left">
 		
-		  	<!-- 1st Color -->
-			<div class="flex flex-wrap gap-4">
+		  	<!-- Input Color -->
+			<div class="flex flex-wrap gap-4" v-for="(colorValues, index) in colorInput" :key="index">
 			<div class="relative grow">
 		    <label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
 		    <input
@@ -35,18 +35,18 @@
 		      "
 		      id="colorInput"
 		      placeholder="#0000"
-          	  v-model="colorEnter"
+          	  v-model="colorValues.color"
 		    />
 			<div 
 				class="absolute bottom-[10%] left-[82%] w-12 h-12 border border-solid border-gray-300 rounded-lg"
-				:style="`background-color:${colorEnter};`" disabled></div>
+				:style="`background-color:${colorValues.color};`" disabled></div>
 			</div>
 
-			<!-- Color Rotation-->
+			<!-- Color Position-->
 			<div class="">
 				<label for="firstColorPosition" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one">Position</label>
 				<input
-				v-model="firstColorPosition"
+				v-model="colorValues.position"
 				type="number"
 				class="
 				shadow-lg
@@ -71,70 +71,9 @@
 			</div>
 			</div>
 
-			<!-- 2nd Color -->
-			<div class="flex flex-wrap gap-4">
-			<div class="relative grow ">
-		    <label for="colorInput" class="form-label inline-block mb-2 text-gray-700 "></label>
-		    <input
-		      type="text"
-		      class=" 
-			    shadow-lg
-		        form-control
-		        block
-		        w-full
-		        px-3
-		        py-5
-		        text-base
-		        font-normal
-		        text-slate-500
-		        bg-white bg-clip-padding
-		        border border-solid border-gray-300
-		        rounded-lg
-		        transition
-		        ease-in-out
-		        m-0
-		        focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
-		      "
-		      id="colorInput"
-		      placeholder="#0000"
-			  v-model="secondColor"
-		    />
-			<div class="absolute bottom-[10%] left-[82%] w-12 h-12 border border-solid border-gray-300 rounded-lg"
-				:style="`background-color:${secondColor};`"></div>
-			</div>
-
-			<!-- Color Rotation-->
-			<div class="">
-				<label for="firstColorPosition" class="form-label inline-block mb-2 text-gray-700"></label>
-				<input
-				v-model="secondColorPosition"
-				type="number"
-				class="
-				shadow-lg
-		        form-control
-		        block
-		        w-full
-		        px-3
-		        py-5
-		        text-base
-		        font-normal
-		        text-slate-500
-		        bg-white bg-clip-padding
-		        border border-solid border-gray-300
-		        rounded-lg
-		        transition
-		        ease-in-out
-		        m-0
-		        focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
-				"
-				id="secondColorPosition"
-				/>
-			</div>
-			</div>
-
 			<!-- Add Color -->
 			<div class="flex justify-center mt-7">
-				<button class="hover:animate-bounce inline-flex items-center justify-center w-full px-3
+				<button @click="addColorInput" class="hover:animate-bounce inline-flex items-center justify-center w-full px-3
 		        py-5 text-white transition-colors duration-150 bg-gray-200 rounded-lg focus:shadow-outline hover:bg-gray-500">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -169,37 +108,46 @@
 			</div>
 
 		    <!-- Preview -->
-		    <div class="mt-10"> 
+		    <div class="mt-10" > 
+
 		    	<h5 class="font-fredoka-one">Preview:</h5>
-		    	<div 
-					v-if="selectedType === 'linear-gradient'"
+				
+		    	<!-- <div 
+					:style="{background: gradient}"
 					class="w-full h-[300px] border border-solid border-gray-300 rounded-lg shadow-lg bg-slate-50"
-					:style="`background: ${selectedType}(${colorAngle}deg, ${colorEnter} ${firstColorPosition}%, ${secondColor} ${secondColorPosition}%);`"	
 				>
-				</div>
-				<div 
+				
+				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!colorInput.color">Ooops! Enter Color Code ;)</p>
+				</div> -->
+				<!-- <div 
 					v-else
 					class="w-full h-[300px] border border-solid border-gray-300 rounded-lg shadow-lg bg-slate-50"
 					:style="`background: ${selectedType}(${colorEnter} ${firstColorPosition}%, ${secondColor} ${secondColorPosition}%);`"
 				>
-				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!colorEnter">Ooops! Enter Color Code ;)</p>
-		    	</div>
+				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!colorInput.color">Ooops! Enter Color Code ;)</p>
+		    	</div> -->
 		    </div>
 
 		    <!-- Code -->
 		    <div class="mt-10"> 
 
 				<h5 class="font-fredoka-one">Code:</h5>
-				<div class="text-emerald-400 bg-slate-700 p-5 rounded-lg flex justify-between">
+				<div class="text-emerald-400 bg-slate-700 p-5 rounded-lg flex justify-between" >
+					<code id="cssCode" class="" v-if="selectedType === 'linear-gradient'">
+						background: {{selectedType}}({{ colorAngle }}deg, 
+						<span v-for="(colorValues, index) in colorInput" :key="index" >
+							{{ colorValues.color }} {{ colorValues.position }}%{{ (index+1 < colorInput.length) ? ', ' : '' }}
+						</span>
+						);	
+					</code>
 					
-		    		<code id="cssCode" class="" v-if="selectedType === 'linear-gradient'" ref="previewCode" >
-						background-color: {{selectedType}}({{ colorAngle }}deg, {{colorEnter}} {{firstColorPosition}}%, {{ secondColor }} {{secondColorPosition}}%);	
-					</code>
-
 					<code id="cssCode" class="" v-else>
-						background-color: {{selectedType}}({{colorEnter}} {{firstColorPosition}}%, {{ secondColor }} {{secondColorPosition}}%);
-					</code>
-
+						background: {{selectedType}}(
+						<span v-for="(colorValues, index) in colorInput" :key="index">
+							{{ colorValues.color }} {{ colorValues.position }}%{{ (index+1 < colorInput.length) ? ', ' : '' }}
+						</span>
+						);
+					</code> 
 					
 					<button
 					 data-clipboard-action="copy" data-clipboard-target="#cssCode"
@@ -231,15 +179,18 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ClipboardJS from 'clipboard'
 
-const colorEnter = ref('#8DD0FC');
-const firstColorPosition = ref(30);
-const secondColor = ref('#D289FF');
-const secondColorPosition = ref(73);
+// const colorEnter = ref('#8DD0FC');
+// const firstColorPosition = ref(30);
+// const secondColor = ref('#D289FF');
+// const secondColorPosition = ref(73);
 const selectedType = ref('linear-gradient')
 const colorAngle = ref(270);
+
+
+// Clipboard Button
 
 var clipboard = new ClipboardJS('.btn');
 
@@ -257,6 +208,25 @@ clipboard.on('error', function(e) {
 	console.error(e)
 });
 
+
+// Add Input Color
+
+const colorInput = ref([
+	{ color: '#8DD0FC' , position: 30},
+	{ color: '#D289FF' , position: 73},
+])
+
+const addColorInput = () => {
+	colorInput.value.push({color: '#e263af' , position: 270})
+}
+
+// const gradient = computed(() => {
+
+
+// 	colorInput.value.forEach((item, index) => {
+// 	console.log(item.color, index)
+// 	})
+// })
 
 </script>
 
