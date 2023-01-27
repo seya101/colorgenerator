@@ -1,16 +1,16 @@
 <template>
 <div class="">
-	<!-- Title -->
-	<div class="mb-10 text-center">
-		<h2 class="font-bold text-5xl font-fredoka-one">CSS Gradient Maker</h2>
-		<p class="mt-2 font-nunito-sans">"Effortlessly elevate your website with stunning gradient styles."</p>
-	</div> 
-		
+		<!-- Title -->
+		<div class="mb-10 text-center">
+			<h2 class="font-bold text-5xl font-fredoka-one">CSS Gradient Maker</h2>
+			<p class="mt-2 font-nunito-sans">"Effortlessly elevate your website with stunning gradient styles."</p>
+		</div> 
+
 		<div class="w-full">
-		<div class="flex flex-row flex-wrap lg:gap-28 gap-4">
-			<section>
+		<div class="flex flex-row flex-wrap justify-center lg:gap-28 gap-4">
+			<section class="w-[500px]">
 			<!-- Input Color -->
-			<div class="flex flex-row gap-4 " v-for="(colorValues, index) in colorInput" :key="index">
+			<div class="flex gap-4" v-for="(colorValues, index) in colorInput" :key="index">
 				<div class="relative w-full mt-7">
 				<label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
 				<input
@@ -115,7 +115,7 @@
 
 			</section>
 
-			<section>
+			<section class="w-[600px]">
 			<!-- Preview -->
 		    <div v-if="selectedType === 'linear-gradient'">
 				<h5 class="font-fredoka-one mt-7">Preview:</h5>
@@ -183,7 +183,7 @@
 		</div>
 		</div>
 		
-
+		
     <vue-basic-alert 
        :duration="300" 
        :closeIn="2000"
