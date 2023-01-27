@@ -1,79 +1,85 @@
 <template>
 <div class="">
 	<!-- Title -->
-	<div class="mt-20 mb-16 text-center">
+	<div class="mb-10 text-center">
 		<h2 class="font-bold text-5xl font-fredoka-one">CSS Gradient Maker</h2>
 		<p class="mt-2 font-nunito-sans">"Effortlessly elevate your website with stunning gradient styles."</p>
 	</div> 
-
 		
-		<div class="w-full text-left">
-		
-		  	<!-- Input Color -->
-			<div class="flex flex-wrap gap-4" v-for="(colorValues, index) in colorInput" :key="index">
-			<div class="relative grow">
-		    <label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
-		    <input
-		      type="text"
-		      class=" 
-			    shadow-lg
-		        form-control
-		        block
-		        w-full
-		        px-3
-		        py-5
-		        text-base
-		        font-normal
-		        text-slate-500
-		        bg-white bg-clip-padding
-		        border border-solid border-gray-300
-		        rounded-lg
-		        transition
-		        ease-in-out
-		        m-0
-		        focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
-		      "
-		      id="colorInput"
-		      placeholder="#0000"
-          	  v-model="colorValues.color"
-		    />
-			<div 
-				class="absolute bottom-[10%] left-[82%] w-12 h-12 border border-solid border-gray-300 rounded-lg"
-				:style="`background-color:${colorValues.color};`" disabled></div>
-			</div>
-
-			<!-- Color Position-->
-			<div class="">
-				<label for="firstColorPosition" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one">Position</label>
+		<div class="w-full">
+		<div class="flex flex-row flex-wrap lg:gap-28 gap-4">
+			<section>
+			<!-- Input Color -->
+			<div class="flex flex-row gap-4 " v-for="(colorValues, index) in colorInput" :key="index">
+				<div class="relative w-full mt-7">
+				<label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
 				<input
-				v-model="colorValues.position"
-				type="number"
-				class="
-				shadow-lg
-		        form-control
-		        block
-		        w-full
-		        px-3
-		        py-5
-		        text-base
-		        font-normal
-		        text-slate-500
-		        bg-white bg-clip-padding
-		        border border-solid border-gray-300
-		        rounded-lg
-		        transition
-		        ease-in-out
-		        m-0
-		        focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
+				type="text"
+				class=" 
+					shadow-lg
+					form-control
+					block
+					w-full
+					px-3
+					py-5
+					text-base
+					font-normal
+					text-slate-500
+					bg-white bg-clip-padding
+					border border-solid border-gray-300
+					rounded-lg
+					transition
+					ease-in-out
+					m-0
+					focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
 				"
-				id="firstColorPosition"
+				id="colorInput"
+				placeholder="#0000"
+				v-model="colorValues.color"
 				/>
-			</div>
+				<div 
+					class="absolute bottom-[10%] left-[80%] w-12 h-12 border border-solid border-gray-300 rounded-lg"
+					:style="`background-color:${colorValues.color};`" disabled></div>
+				</div>
+
+				<!-- Color Position-->
+				<div class="mt-7">
+					<label for="firstColorPosition" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one">Position</label>
+					<input
+					v-model="colorValues.position"
+					type="number"
+					class="
+					shadow-lg
+					form-control
+					block
+					w-full
+					px-3
+					py-5
+					text-base
+					font-normal
+					text-slate-500
+					bg-white bg-clip-padding
+					border border-solid border-gray-300
+					rounded-lg
+					transition
+					ease-in-out
+					m-0
+					focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
+					"
+					id="firstColorPosition"
+					/>
+				</div>
+				<!-- Delete -->
+				<div @click="deleteColorInput(index)" class="grid content-center mt-16 hover:text-red-400" >
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+				</svg>
+				</div>
 			</div>
 
 			<!-- Add Color -->
 			<div class="flex justify-center mt-7">
-				<button @click="addColorInput" class="hover:animate-bounce inline-flex items-center justify-center w-full px-3
+				<button @click="addColorInput" class="inline-flex items-center justify-center w-full px-3
 		        py-5 text-white transition-colors duration-150 bg-gray-200 rounded-lg focus:shadow-outline hover:bg-gray-500">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -107,25 +113,27 @@
 				<p class="">{{ colorAngle }}&deg;</p>
 			</div>
 
-		    <!-- Preview -->
-		    <div class="mt-10" > 
+			</section>
 
-		    	<h5 class="font-fredoka-one">Preview:</h5>
-				
-		    	<!-- <div 
-					:style="{background: gradient}"
+			<section>
+			<!-- Preview -->
+		    <div v-if="selectedType === 'linear-gradient'">
+				<h5 class="font-fredoka-one mt-7">Preview:</h5>
+		    	<div 
+				 	:style="`background: ${gradient}`" 
 					class="w-full h-[300px] border border-solid border-gray-300 rounded-lg shadow-lg bg-slate-50"
 				>
-				
-				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!colorInput.color">Ooops! Enter Color Code ;)</p>
-				</div> -->
-				<!-- <div 
-					v-else
+				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!gradient">Ooops! Enter Color Code ;)</p>
+				</div>
+			</div>
+		    <div class="mt-10" v-else> 
+				<h5 class="font-fredoka-one mt-7">Preview:</h5>
+				<div 
+					:style="`background: ${gradientRadial}`" 
 					class="w-full h-[300px] border border-solid border-gray-300 rounded-lg shadow-lg bg-slate-50"
-					:style="`background: ${selectedType}(${colorEnter} ${firstColorPosition}%, ${secondColor} ${secondColorPosition}%);`"
-				>
-				<p class="grid justify-items-center text-slate-300 mt-32" v-if="!colorInput.color">Ooops! Enter Color Code ;)</p>
-		    	</div> -->
+			   	>
+			   <p class="grid justify-items-center text-slate-300 mt-32" v-if="!gradient">Ooops! Enter Color Code ;)</p>
+			   </div>
 		    </div>
 
 		    <!-- Code -->
@@ -137,21 +145,22 @@
 						background: {{selectedType}}({{ colorAngle }}deg, 
 						<span v-for="(colorValues, index) in colorInput" :key="index" >
 							{{ colorValues.color }} {{ colorValues.position }}%{{ (index+1 < colorInput.length) ? ', ' : '' }}
-						</span>
-						);	
+						</span>);	
 					</code>
 					
 					<code id="cssCode" class="" v-else>
-						background: {{selectedType}}(
-						<span v-for="(colorValues, index) in colorInput" :key="index">
+						background: {{selectedType}}(<span v-for="(colorValues, index) in colorInput" :key="index">
 							{{ colorValues.color }} {{ colorValues.position }}%{{ (index+1 < colorInput.length) ? ', ' : '' }}
-						</span>
-						);
+						</span>);
 					</code> 
 					
 					<button
 					 data-clipboard-action="copy" data-clipboard-target="#cssCode"
-						
+					 @click="$refs.alert
+        .showAlert(
+            'success', // There are 4 types of alert: success, info, warning, error
+            'Copied to clipboard', // Size of the icon (px)
+        )"
 						type="button"
 						class=" btn
 						w-26
@@ -170,10 +179,16 @@
 		    	</div>
 				
 		    </div>
-
+			</section>
 		</div>
-
+		</div>
 		
+
+    <vue-basic-alert 
+       :duration="300" 
+       :closeIn="2000"
+       ref="alert" />
+
 </div>
 </template>
 
@@ -181,11 +196,11 @@
 <script setup>
 import { computed, ref } from 'vue'
 import ClipboardJS from 'clipboard'
+import VueBasicAlert from 'vue-basic-alert'
+// Notif
 
-// const colorEnter = ref('#8DD0FC');
-// const firstColorPosition = ref(30);
-// const secondColor = ref('#D289FF');
-// const secondColorPosition = ref(73);
+
+
 const selectedType = ref('linear-gradient')
 const colorAngle = ref(270);
 
@@ -198,7 +213,6 @@ clipboard.on('success', function(e) {
     console.info('Action:', e.action);
     console.info('Text:', e.text);
     console.info('Trigger:', e.trigger);
-	alert('Copied to clipboard')
     e.clearSelection();
 });
 
@@ -217,16 +231,43 @@ const colorInput = ref([
 ])
 
 const addColorInput = () => {
-	colorInput.value.push({color: '#e263af' , position: 270})
+	colorInput.value.push({color: '#e263af' , position: 20})
 }
 
-// const gradient = computed(() => {
+const deleteColorInput = (index) => {
+	colorInput.value.splice(index, 1)
+	console.log(index)
+}
+
+// Dynamic Preview
+
+const gradient = computed(() => {
+
+	let colors = selectedType.value + '(' + colorAngle.value + 'deg';
+	colorInput.value.forEach((item) => {
+		
+		colors += ', ' + item.color + ' ' + item.position + '%';
+
+	})
+	colors += ");";
+	return colors
+	
+});
 
 
-// 	colorInput.value.forEach((item, index) => {
-// 	console.log(item.color, index)
-// 	})
-// })
+const gradientRadial = computed(() => {
+
+let colorsRadial = 'radial-gradient(';
+colorInput.value.forEach((item, index) => {
+	
+	colorsRadial += ' ' + item.color + ' ' + item.position + '%' + (index+1 < colorInput.value.length ? ', ' : '');
+});
+
+colorsRadial += ");";
+console.log(colorsRadial)
+return colorsRadial
+
+})
 
 </script>
 
