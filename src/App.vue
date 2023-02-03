@@ -1,17 +1,20 @@
 <template>
 <div class="">
+	
 		<!-- Title -->
 		<div class="mb-10 text-center">
 			<h2 class="font-bold text-5xl font-fredoka-one">CSS Gradient Maker</h2>
 			<p class="mt-2 font-nunito-sans">"Effortlessly elevate your website with stunning gradient styles."</p>
 		</div> 
-
+		
 		<div class="w-full">
 		<div class="flex flex-row flex-wrap justify-center lg:gap-28 gap-4">
 			<section class="w-[500px]">
+
+				
 			<!-- Input Color -->
 			<div class="flex gap-4" v-for="(colorValues, index) in colorInput" :key="index">
-				<div class="relative w-full mt-7">
+				<div class="relative w-full">
 				<label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
 				<input
 				type="text"
@@ -37,13 +40,11 @@
 				placeholder="#0000"
 				v-model="colorValues.color"
 				/>
-				<div 
-					class="absolute bottom-[10%] left-[80%] w-12 h-12 border border-solid border-gray-300 rounded-lg"
-					:style="`background-color:${colorValues.color};`" disabled></div>
+				<ColorInput format="hex object" transition="my-cool-transition" v-model="colorValues.color" class="absolute bottom-[37%] left-[80%]  border border-solid border-gray-300 rounded-lg" :style="`background-color:${colorValues.color};`"/>
 				</div>
 
 				<!-- Color Position-->
-				<div class="mt-7">
+				<div class="">
 					<label for="firstColorPosition" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one">Position</label>
 					<input
 					v-model="colorValues.position"
@@ -70,7 +71,7 @@
 					/>
 				</div>
 				<!-- Delete -->
-				<div @click="deleteColorInput(index)" class="grid content-center mt-16 hover:text-red-400" >
+				<div @click="deleteColorInput(index)" class="my-auto hover:text-red-400" >
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
 				</svg>
@@ -197,8 +198,7 @@
 import { computed, ref } from 'vue'
 import ClipboardJS from 'clipboard'
 import VueBasicAlert from 'vue-basic-alert'
-// Notif
-
+import ColorInput from 'vue-color-input'
 
 
 const selectedType = ref('linear-gradient')
@@ -271,3 +271,34 @@ return colorsRadial
 
 </script>
 
+<style scss>
+
+.picker-popup {
+	border-radius: 10px;
+}
+
+.color-input .saturation-area {
+	border-radius: 10px;
+}
+
+.color-input .picker-popup {
+    text-transform: uppercase;
+}
+
+.color-input .text-inputs-wrapper .text-input {
+	background-color: #dedede;
+    border-radius: 5px;
+}
+
+.color-input.user .picker-popup-enter-from {
+    transform: translateY(-100%) scale(.1);
+}
+.color-input.user .picker-popup-leave-to {
+    transform: scale(3);
+}
+
+.color-input.user .picker-popup-enter-active,
+.color-input.user .picker-popup-leave-active {
+    transition: all .5s;
+}
+</style>
