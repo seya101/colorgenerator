@@ -17,10 +17,21 @@ body {
   padding: 2rem;
 }
 
+@media screen and (max-width: 640px) {
+  .custom-bottom {
+    bottom: 55px;
+  }
+
+}
+
+
 @media screen and (max-width: 320PX) {
   .color-input .box {
     width: 20px!important;
     height: 20px!important;
   }
 
+  .custom-bottom {
+    bottom: 45px;
+  }
 }
