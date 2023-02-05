@@ -8,12 +8,12 @@
 		</div> 
 		
 		<div class="w-full">
-		<div class="flex flex-row flex-wrap justify-center lg:gap-28 gap-4">
+		<div class="flex flex-row flex-wrap justify-center lg:gap-28 sm:gap-4">
 			<section class="w-[500px]">
 
 				
 			<!-- Input Color -->
-			<div class="flex gap-4" v-for="(colorValues, index) in colorInput" :key="index">
+			<div class="flex sm:gap-4 gap-2" v-for="(colorValues, index) in colorInput" :key="index">
 				<div class="relative w-full">
 				<label for="colorInput" class="form-label inline-block mb-2 text-gray-700 font-fredoka-one"> Color</label>
 				<input
@@ -40,7 +40,9 @@
 				placeholder="#0000"
 				v-model="colorValues.color"
 				/>
-				<ColorInput format="hex object" transition="my-cool-transition" v-model="colorValues.color" class="absolute bottom-[37%] left-[80%]  border border-solid border-gray-300 rounded-lg" :style="`background-color:${colorValues.color};`"/>
+				<ColorInput format="hex object" transition="my-cool-transition" v-model="colorValues.color" 
+				class="absolute bottom-[37%] sm:left-[83%] left-[70%] border border-solid border-gray-300 rounded-lg" 
+				:style="`background-color:${colorValues.color};`"/>
 				</div>
 
 				<!-- Color Position-->
@@ -119,7 +121,7 @@
 			<section class="w-[600px]">
 			<!-- Preview -->
 		    <div v-if="selectedType === 'linear-gradient'">
-				<h5 class="font-fredoka-one mt-7">Preview:</h5>
+				<h5 class="font-fredoka-one -md:mt-7">Preview:</h5>
 		    	<div 
 				 	:style="`background: ${gradient}`" 
 					class="w-full h-[300px] border border-solid border-gray-300 rounded-lg shadow-lg bg-slate-50"
@@ -158,21 +160,24 @@
 					<button
 					 data-clipboard-action="copy" data-clipboard-target="#cssCode"
 					 @click="$refs.alert
-        .showAlert(
-            'success', // There are 4 types of alert: success, info, warning, error
-            'Copied to clipboard', // Size of the icon (px)
-        )"
+					.showAlert(
+						'success',
+						'Copied to clipboard', 
+					)"
 						type="button"
 						class=" btn
 						w-26
 						ml-20 p-3 
-						text-gray-900 
-						border border-gray-200 focus:text-gray-700 bg-white focus:outline-none
+						text-gray-900   bg-zinc-100 
+						hover:bg-slate-400
+						hover:border-slate-400
+						hover:text-white
 						rounded-lg 
 						text-[13px] text-center 
-						inline-flex items-center
+						inline-flex items-center self-center
+						h-1/2
 						">
-							<svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+							<svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 ">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z" />
 							</svg>
 							<div class="ml-2">COPY</div>
