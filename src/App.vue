@@ -41,7 +41,7 @@
 				v-model="colorValues.color"
 				/>
 				<ColorInput format="hex object" transition="my-cool-transition" v-model="colorValues.color" 
-				class="absolute bottom-[37%] sm:left-[83%] left-[70%] border border-solid border-gray-300 rounded-lg" 
+				class="absolute sm:bottom-[37%] sm:left-[83%] left-[70%] bottom-[45px] border border-solid border-gray-300 rounded-lg" 
 				:style="`background-color:${colorValues.color};`"/>
 				</div>
 
